@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* ===== Background Blur ===== */
+.bg {
+    position: fixed;
+    inset: 0;
+    background: url("img/kivotos\ BG.jpg") center/cover no-repeat;
+    filter: blur(8px) brightness(0.6);
+    z-index: -1;
+}
+
+
+/* ===== Card Style ===== */
+.card {
+    width: 90%;
+    max-width: 520px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin: 20px 0;
+    animation: fadeIn 0.4s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    margin: 20px 0;
+    font-size: 14px;
+    outline: none;
+}
+
+/* ===== Buttons ===== */
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.casual {
+    background: linear-gradient(135deg, #4dd0ff, #2196f3);
+    color: #003c6c;
+}
+
+.casual:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(33, 150, 243, 0.6);
+}
+
+.compe {
+    background: linear-gradient(135deg, #ff6a88, #ff1744);
+    color: white;
+}
+
+.compe:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 23, 68, 0.6);
+}
+
+/* ===== Game UI ===== */
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.timer {
+    color: #ffd54f;
+    font-weight: 600;
+}
+
+.correct {
+    color: #4caf50;
+}
+
+.wrong {
+    color: #ff5252;
+}
+
+.question {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.answers button {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    background: white;
+    color: #1e3c72;
+    transition: 0.3s;
+}
+
+.answers button:hover {
+    background: linear-gradient(135deg, #4e73df, #6a11cb);
+    color: white;
+    transform: scale(1.03);
+}
+
+/* ===== Developer Section ===== */
+.developer-section {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.dev-card {
+    position: relative;
+    width: 140px;
+    height: 170px;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* Crop Head-Shoulder */
+.dev-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: 0.4s;
+}
+
+.dev-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Glow Different Colors */
+.dev-card.mika:hover {
+    box-shadow: 0 10px 35px rgba(255, 105, 180, 0.7);
+}
+
+.dev-card.alice:hover {
+    box-shadow: 0 10px 35px rgba(0, 200, 255, 0.7);
+}
+
+.dev-name {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 8px;
+    font-size: 13px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: 0.3s;
+}
+
+.dev-card:hover .dev-name {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media(max-width:600px) {
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .developer-section {
+        gap: 15px;
+    }
+
+    .dev-card {
+        width: 110px;
+        height: 140px;
+    }
+}

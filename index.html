@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<!-- //serina,hanae,idop pop.trinity summer,Gdd battle suit,mahou sojo vigilante,higlender school// -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Archive Quiz [V1]</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Background Blur -->
+    <div class="bg"></div>
+
+    <!-- START SCREEN -->
+    <div class="card" id="startScreen">
+        <h1 class="title">Blue Archive Quiz</h1>
+        <p class="subtitle">Uji Pengetahuanmu, Sensei ✨</p>
+
+        <input type="text" id="playerName" placeholder="Masukkan Nama Sensei">
+
+        <div class="btn-group">
+            <button onclick="startGame('casual')" class="btn casual">Casual Mode</button>
+            <button onclick="startGame('compe')" class="btn compe">Compe Mode</button>
+        </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div class="card hidden" id="gameScreen">
+        <div class="top">
+            <div class="timer">⏳ <span id="timer">30</span>s</div>
+            <div class="score">
+                <span class="correct">✅ <span id="correct">0</span></span>
+                <span class="wrong">❌ <span id="wrong">0</span></span>
+            </div>
+        </div>
+
+        <h2 id="question" class="question"></h2>
+        <div id="answers" class="answers"></div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div class="card hidden" id="resultScreen">
+        <h1 class="result-title">Mission Result</h1>
+        <div id="resultText"></div>
+        <h2 id="grade"></h2>
+        <button onclick="location.reload()" class="btn casual">Main Lagi</button>
+    </div>
+
+    <!-- Developer Section -->
+    <div class="developer-section">
+
+        <div class="dev-card mika">
+            <img src="img/Mika_Portrait.png" alt="Dev Mika">
+            <div class="dev-name">Create By CelestiaXD</div>
+        </div>
+
+        <div class="dev-card mika">
+            <img src="img/Kisaki_Portrait.png" alt="Dev Mika">
+            <div class="dev-name">Sponsor By Juragan uzuf</div>
+        </div>
+
+        <div class="dev-card alice">
+            <img src="img/Alice_Portrait.png" alt="Dev Alice">
+            <div class="dev-name">Create By Taiga raja ibelis</div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

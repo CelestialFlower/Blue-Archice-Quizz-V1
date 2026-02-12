@@ -1,0 +1,35 @@
+[
+  {
+    "sekolah": "Millennium",
+    "nama": "Karin (Bunny Girl)",
+    "klub": "C&C",
+    "attack": "Mystic",
+    "armor": "Heavy",
+    "ex_skill": "Promptly and precisely: Deal 325~521% damage to enemies in a conical area, ignoring 32~48% of their defense.",
+    "basic_skill": "Wide-area firing, commence: Every 25 seconds, deal 111~192% damage to enemies in a circular area, ignoring 20~32% of their defense.",
+    "passive_skill": "Firepower upgrade, complete: Increase Attack by 14~26.6%.",
+    "sub_skill": "Carefully and correctly: Upon activating EX skill, increase Critical Rate by 12.9~24.5% for 40 seconds."
+  },
+  {
+    "sekolah": "Millennium",
+    "nama": "Arisu (Battle)",
+    "klub": "Game Development Club",
+    "attack": "Mystic",
+    "armor": "Composite",
+    "ex_skill": "Awakening: Supernova: Deal 700~1330% damage to one enemy, and 105~200% damage to others in a straight line. Damage increases depending on energy charge stage.",
+    "basic_skill": "The Magic of Courage: Instantly reload when ammunition reaches 0. Deal 240~457% damage to one enemy.",
+    "passive_skill": "A Heart to Never Give Up: Increase Attack by 14~26.6%.",
+    "sub_skill": "Type: Abi-Eshuh: Change all damage to EX type. Increase damage dealt by 21.1~40.1% and EX skill damage by 8.1~15.4%."
+  },
+  {
+    "sekolah": "Millennium",
+    "nama": "Kei",
+    "klub": "Unknown",
+    "attack": "Mystic",
+    "armor": "Composite",
+    "ex_skill": "Here I am: Place an amplifier increasing allies' Attack by 26.8~51% and Mystic Efficiency by 44.1~83.8% for 25 seconds.",
+    "basic_skill": "So, you've made me angry?!: When amplifier ends, deal 148~281% damage plus 40~100% accumulated damage.",
+    "passive_skill": "I will resist!: Increase Critical Damage by 14~26.6%.",
+    "sub_skill": "Friends walking together: Increase allies' Critical Rate by 13.1~22.3% within amplifier range."
+  }
+]
