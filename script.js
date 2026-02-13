@@ -2,7 +2,7 @@ let students = [];
 let usedIndexes = [];
 let correct = 0;
 let wrong = 0;
-let timer = 150;
+let timer = 200;
 let interval;
 let mode = "";
 let playerName = "";
@@ -27,7 +27,7 @@ function startGame(selectedMode) {
     // RESET SEMUA
     correct = 0;
     wrong = 0;
-    timer = 150;
+    timer = 200;
     usedIndexes = [];
     clearInterval(interval);
 
@@ -375,7 +375,7 @@ function endGame() {
 
     let gradeText = "";
 
-    if (correct > 20) {
+    if (correct >= 20) {
         gradeText = "🔥 INIMAH RAJA MALDING 🔥";
     } else if (correct >= 15) {
         gradeText = "💎 GG Sensei";
