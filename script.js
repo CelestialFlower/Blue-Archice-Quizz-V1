@@ -2,7 +2,7 @@ let students = [];
 let usedIndexes = [];
 let correct = 0;
 let wrong = 0;
-let timer = 200;
+let timer = 400;
 let interval;
 let mode = "";
 let playerName = "";
@@ -40,7 +40,7 @@ function startGame(selectedMode) {
 
     correct = 0;
     wrong = 0;
-    timer = 200;
+    timer = 400;
     usedIndexes = [];
     clearInterval(interval);
 
