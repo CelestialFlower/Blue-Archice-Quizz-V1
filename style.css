@@ -239,6 +239,10 @@ input {
     display: none;
 }
 
+#leaderboard {
+    margin-top: 20px;
+}
+
 .leaderboard-row {
     display: flex;
     justify-content: space-between;
@@ -258,4 +262,5 @@ input {
 .rank {
     font-weight: bold;
 }
+
 
