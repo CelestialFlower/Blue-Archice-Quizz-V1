@@ -239,16 +239,23 @@ input {
     display: none;
 }
 
-#leaderboard {
-    margin-top: 20px;
-}
-
 .leaderboard-row {
     display: flex;
     justify-content: space-between;
-    padding: 8px;
-    margin: 5px 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 12px; /* JARAK ANTAR BARIS */
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
     font-size: 14px;
 }
+
+.leaderboard-row span {
+    flex: 1;
+    text-align: center;
+}
+
+.rank {
+    font-weight: bold;
+}
+
