@@ -189,7 +189,11 @@ input {
 
 /* Glow Different Colors */
 .dev-card.mika:hover {
-    box-shadow: 0 10px 35px rgba(255, 105, 180, 0.7);
+    box-shadow: 0 10px 35px rgba(255, 55, 0, 0.7);
+}
+
+.dev-card.kisaki:hover {
+    box-shadow: 0 10px 35px rgba(255, 0, 247, 0.7);
 }
 
 .dev-card.alice:hover {
@@ -229,4 +233,8 @@ input {
         width: 110px;
         height: 140px;
     }
+}
+
+.hidden {
+    display: none;
 }
