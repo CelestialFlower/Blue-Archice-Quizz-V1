@@ -238,3 +238,17 @@ input {
 .hidden {
     display: none;
 }
+
+#leaderboard {
+    margin-top: 20px;
+}
+
+.leaderboard-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    margin: 5px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-size: 14px;
+}
