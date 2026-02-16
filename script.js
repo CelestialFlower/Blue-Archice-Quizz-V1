@@ -310,45 +310,17 @@ function loadLeaderboard() {
 }
 
 // =======================
-// RESET LEADERBOARD
-// =======================
-// =======================
-// CONFIG
+// LEADERBOARD CONFIG
 // =======================
 const STORAGE_KEY = "blue_archive_quiz_v1_leaderboard";
-const ADMIN_PASSWORD = "Mika4love"; // GANTI PASSWORD ADMIN
+const ADMIN_PASSWORD = "Mika4love"; // ganti kalau mau
 
-function resetLeaderboard() {
-
-    let input = prompt("Masukkan password admin untuk reset leaderboard:");
-
-    if (input === null) return; // jika cancel
-
-    if (input === ADMIN_PASSWORD) {
-
-        localStorage.removeItem("ba_leaderboard");
-        loadLeaderboard();
-        alert("Leaderboard berhasil direset!");
-
-    } else {
-        alert("Password salah! Akses ditolak.");
-    }
-}
-let isAdmin = false;
-function adminLogin() {
-
-    let pass = prompt("Masukkan password admin:");
-
-    if (pass === ADMIN_PASSWORD) {
-        isAdmin = true;
-        document.getElementById("adminPanel").classList.remove("hidden");
-        alert("Login admin berhasil!");
-    } else {
-        alert("Password salah!");
-    }
-}
-
+// =======================
+// SAVE SCORE (FIXED)
+// =======================
 function saveScore() {
+
+    if (!playerName) return;
 
     let leaderboard = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
@@ -359,14 +331,73 @@ function saveScore() {
         date: new Date().toLocaleDateString()
     });
 
-    // Urutkan skor tertinggi
     leaderboard.sort((a, b) => b.score - a.score);
-
-    // Ambil Top 10
     leaderboard = leaderboard.slice(0, 10);
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(leaderboard));
 }
+
+// =======================
+// LOAD LEADERBOARD (FIXED)
+// =======================
+function loadLeaderboard() {
+
+    let leaderboard = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let boardDiv = document.getElementById("leaderboard");
+
+    if (!boardDiv) return;
+
+    boardDiv.innerHTML = "";
+
+    if (leaderboard.length === 0) {
+        boardDiv.innerHTML = "<p>Belum ada data.</p>";
+        return;
+    }
+
+    leaderboard.forEach((player, index) => {
+
+        let medal = "";
+        if (index === 0) medal = "🥇";
+        else if (index === 1) medal = "🥈";
+        else if (index === 2) medal = "🥉";
+
+        let row = document.createElement("div");
+        row.className = "leaderboard-row";
+
+        row.innerHTML = `
+            <span>${medal} #${index + 1}</span>
+            <span>${player.name}</span>
+            <span>${player.mode}</span>
+            <span>${player.score}</span>
+            <span>${player.date}</span>
+        `;
+
+        boardDiv.appendChild(row);
+    });
+}
+
+// =======================
+// RESET LEADERBOARD (ADMIN ONLY)
+// =======================
+function resetLeaderboard() {
+
+    let input = prompt("Masukkan password admin untuk reset leaderboard:");
+
+    if (input === null) return;
+
+    if (input === ADMIN_PASSWORD) {
+        localStorage.removeItem(STORAGE_KEY);
+        loadLeaderboard();
+        alert("Leaderboard berhasil direset!");
+    } else {
+        alert("Password salah! Akses ditolak.");
+    }
+}
+
+// =======================
+// AUTO LOAD SAAT BUKA HALAMAN
+// =======================
 window.addEventListener("load", () => {
     loadLeaderboard();
 });
+
