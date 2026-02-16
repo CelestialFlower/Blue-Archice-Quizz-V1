@@ -2,7 +2,7 @@ let students = [];
 let usedIndexes = [];
 let correct = 0;
 let wrong = 0;
-let timer = 100;
+let timer = 200;
 let interval;
 let mode = "";
 let playerName = "";
@@ -40,7 +40,7 @@ function startGame(selectedMode) {
 
     correct = 0;
     wrong = 0;
-    timer = 100;
+    timer = 200;
     usedIndexes = [];
     clearInterval(interval);
 
@@ -312,7 +312,12 @@ function loadLeaderboard() {
 // =======================
 // RESET LEADERBOARD
 // =======================
-const ADMIN_PASSWORD = "Mika4love123"; // GANTI dengan password kamu sendiri
+// =======================
+// CONFIG
+// =======================
+const STORAGE_KEY = "blue_archive_quiz_v1_leaderboard";
+const ADMIN_PASSWORD = "Mika4love"; // GANTI PASSWORD ADMIN
+
 function resetLeaderboard() {
 
     let input = prompt("Masukkan password admin untuk reset leaderboard:");
@@ -343,3 +348,25 @@ function adminLogin() {
     }
 }
 
+function saveScore() {
+
+    let leaderboard = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    leaderboard.push({
+        name: playerName,
+        mode: mode.toUpperCase(),
+        score: correct,
+        date: new Date().toLocaleDateString()
+    });
+
+    // Urutkan skor tertinggi
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    // Ambil Top 10
+    leaderboard = leaderboard.slice(0, 10);
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(leaderboard));
+}
+window.addEventListener("load", () => {
+    loadLeaderboard();
+});
