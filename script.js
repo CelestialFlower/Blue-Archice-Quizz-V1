@@ -365,11 +365,10 @@ function loadLeaderboard() {
         row.className = "leaderboard-row";
 
         row.innerHTML = `
-            <span>${medal} #${index + 1}</span>
-            <span>${player.name}</span>
-            <span>${player.mode}</span>
-            <span>${player.score}</span>
-            <span>${player.date}</span>
+            <span class="rank">${medal} #${index + 1}</span>
+            <span class="name">${player.name}</span>
+            <span class="score">${player.score} Benar</span>
+            <span class="mode">${player.mode}</span>
         `;
 
         boardDiv.appendChild(row);
