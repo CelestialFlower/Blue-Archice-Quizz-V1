@@ -57,9 +57,15 @@
         <div class="dev-card mika">
             <img src="img/Mika_Portrait.png" alt="Dev Mika">
             <div class="dev-name">Create By CelestiaXD</div>
+            <button onclick="adminLogin()">Admin Login</button>
+
+            <div id="adminPanel" class="hidden">
+                <button onclick="resetLeaderboard()">Reset Leaderboard</button>
+            </div>
+
         </div>
 
-        <div class="dev-card mika">
+        <div class="dev-card kisaki">
             <img src="img/Kisaki_Portrait.png" alt="Dev Mika">
             <div class="dev-name">Sponsor By Juragan uzuf</div>
         </div>
@@ -70,6 +76,11 @@
         </div>
 
     </div>
+    <h2>🏆 Leaderboard</h2>
+    <div id="leaderboard"></div>
+    <button onclick="resetLeaderboard()">Reset Leaderboard</button>
+
+
 
     <script src="script.js"></script>
 </body>
