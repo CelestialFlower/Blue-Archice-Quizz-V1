@@ -285,52 +285,46 @@ function submitScore() {
 
     const now = Date.now();
     const nameKey = playerName.toLowerCase().trim();
+    const leaderboardRef = database.ref("leaderboard/" + nameKey);
 
-    const leaderboardRef = database.ref("leaderboard");
+    leaderboardRef.transaction(currentData => {
 
-    leaderboardRef.child(nameKey).once("value", snapshot => {
-
-        if (snapshot.exists()) {
-
-            const oldData = snapshot.val();
-            const oldScore = oldData.score;
-
-            // 🔥 Jika score baru lebih besar atau sama → update
-            if (correct >= oldScore) {
-
-                leaderboardRef.child(nameKey).update({
-                    name: playerName,
-                    score: correct,
-                    mode: mode.toUpperCase(),
-                    timestamp: now
-                });
-
-                console.log("Score diupdate!");
-
-            } else {
-
-                console.log("Score lebih kecil, tidak diupdate.");
-
-            }
-
-        } else {
-
-            // 🔥 Jika belum ada → buat baru
-            leaderboardRef.child(nameKey).set({
+        // 🔥 Jika belum ada data → buat baru
+        if (currentData === null) {
+            return {
                 name: playerName,
                 score: correct,
                 mode: mode.toUpperCase(),
                 timestamp: now
-            });
+            };
+        }
 
-            console.log("Score baru ditambahkan!");
+        // 🔥 Jika score baru >= score lama → replace
+        if (correct >= currentData.score) {
+            return {
+                name: playerName,
+                score: correct,
+                mode: mode.toUpperCase(),
+                timestamp: now
+            };
+        }
+
+        // 🔥 Jika score lebih kecil → batal update
+        return; // tidak mengganti apa pun
+
+    }, (error, committed) => {
+
+        if (error) {
+            console.error("Transaction gagal:", error);
+        } else if (!committed) {
+            console.log("Score lebih kecil, tidak diupdate.");
+        } else {
+            console.log("Score berhasil diproses.");
         }
 
     });
 
 }
-
-
 
 // =======================
 // REALTIME LEADERBOARD
