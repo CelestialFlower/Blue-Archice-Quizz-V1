@@ -257,13 +257,16 @@ input {
 }
 
 .leaderboard-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 90px 1fr 130px 120px;
+    align-items: center;
+    padding: 12px 20px;
+    margin-bottom: 12px;
     background: #2a2a3f;
     border-radius: 8px;
     font-size: 14px;
+    gap: 15px;
+    /* 🔥 ini yang bikin jarak antar text */
 }
 
 .reset-btn {
