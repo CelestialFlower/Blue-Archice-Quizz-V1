@@ -16,14 +16,15 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
-
+//=======================
 //variabel game
+//=======================
 const database = firebase.database();
 let students = [];
 let usedIndexes = [];
 let correct = 0;
 let wrong = 0;
-let timer = 120;
+let timer = 4;
 let interval;
 let mode = "";
 let playerName = "";
@@ -63,7 +64,7 @@ function startGame(selectedMode) {
 
     correct = 0;
     wrong = 0;
-    timer = 120;
+    timer = 5;
     usedIndexes = [];
     clearInterval(interval);
 
@@ -285,11 +286,12 @@ function submitScore() {
 
     const now = Date.now();
     const nameKey = playerName.toLowerCase().trim();
-    const leaderboardRef = database.ref("leaderboard/" + nameKey);
+    const modeKey = mode.toLowerCase(); // casual / compe
 
-    leaderboardRef.transaction(currentData => {
+    const playerRef = database.ref("leaderboard/" + modeKey + "/" + nameKey);
 
-        // 🔥 Jika belum ada data → buat baru
+    playerRef.transaction(currentData => {
+
         if (currentData === null) {
             return {
                 name: playerName,
@@ -299,7 +301,6 @@ function submitScore() {
             };
         }
 
-        // 🔥 Jika score baru >= score lama → replace
         if (correct >= currentData.score) {
             return {
                 name: playerName,
@@ -309,22 +310,11 @@ function submitScore() {
             };
         }
 
-        // 🔥 Jika score lebih kecil → batal update
-        return; // tidak mengganti apa pun
-
-    }, (error, committed) => {
-
-        if (error) {
-            console.error("Transaction gagal:", error);
-        } else if (!committed) {
-            console.log("Score lebih kecil, tidak diupdate.");
-        } else {
-            console.log("Score berhasil diproses.");
-        }
+        return; // tidak update jika lebih kecil
 
     });
-
 }
+
 
 // =======================
 // REALTIME LEADERBOARD
@@ -332,11 +322,17 @@ function submitScore() {
 
 function loadLeaderboard() {
 
-    let boardDiv = document.getElementById("leaderboard");
+    loadModeLeaderboard("casual");
+    loadModeLeaderboard("compe");
+}
+
+function loadModeLeaderboard(modeKey) {
+
+    const boardDiv = document.getElementById("leaderboard-" + modeKey);
     if (!boardDiv) return;
 
-    database.ref("leaderboard")
-        .once("value", snapshot => {
+    database.ref("leaderboard/" + modeKey)
+        .on("value", snapshot => {
 
             boardDiv.innerHTML = "";
 
@@ -346,10 +342,7 @@ function loadLeaderboard() {
                 data.push(child.val());
             });
 
-            // 🔥 Sort manual
             data.sort((a, b) => b.score - a.score);
-
-            // 🔥 Ambil 10 teratas
             data = data.slice(0, 10);
 
             if (data.length === 0) {
@@ -371,7 +364,6 @@ function loadLeaderboard() {
                     <span>${medal} #${index + 1}</span>
                     <span>${player.name}</span>
                     <span>${player.score} Benar</span>
-                    <span>${player.mode}</span>
                 `;
 
                 boardDiv.appendChild(row);
@@ -380,23 +372,26 @@ function loadLeaderboard() {
         });
 }
 
+
+
 // =======================
 // ADMIN RESET
 // =======================
 
 const ADMIN_PASSWORD = "Mika4love";
 
-function resetLeaderboard() {
+function resetLeaderboard(modeKey) {
 
     let input = prompt("Masukkan password admin:");
 
     if (input === ADMIN_PASSWORD) {
-        database.ref("leaderboard").remove();
-        alert("Leaderboard berhasil direset!");
+        database.ref("leaderboard/" + modeKey).remove();
+        alert("Leaderboard " + modeKey + " berhasil direset!");
     } else {
         alert("Password salah!");
     }
 }
+
 
 // =======================
 // AUTO LOAD
