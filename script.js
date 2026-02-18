@@ -313,16 +313,21 @@ function loadLeaderboard() {
     if (!boardDiv) return;
 
     database.ref("leaderboard")
-        .orderByChild("score")
-        .limitToLast(10)
-        .on("value", snapshot => {
+        .once("value", snapshot => {
 
             boardDiv.innerHTML = "";
 
             let data = [];
-            snapshot.forEach(child => data.push(child.val()));
 
+            snapshot.forEach(child => {
+                data.push(child.val());
+            });
+
+            // 🔥 Sort manual
             data.sort((a, b) => b.score - a.score);
+
+            // 🔥 Ambil 10 teratas
+            data = data.slice(0, 10);
 
             if (data.length === 0) {
                 boardDiv.innerHTML = "<p>Belum ada data.</p>";
@@ -338,17 +343,17 @@ function loadLeaderboard() {
 
                 let row = document.createElement("div");
                 row.className = "leaderboard-row";
-                row.style.marginBottom = "12px";
 
                 row.innerHTML = `
-          <span>${medal} #${index + 1}</span>
-          <span>${player.name}</span>
-          <span>${player.score} Benar</span>
-          <span>${player.mode}</span>
-        `;
+                    <span>${medal} #${index + 1}</span>
+                    <span>${player.name}</span>
+                    <span>${player.score} Benar</span>
+                    <span>${player.mode}</span>
+                `;
 
                 boardDiv.appendChild(row);
             });
+
         });
 }
 
