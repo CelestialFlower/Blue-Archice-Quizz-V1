@@ -239,28 +239,43 @@ input {
     display: none;
 }
 
-#leaderboard {
-    margin-top: 20px;
+.leaderboard-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.leaderboard-title {
+    margin-bottom: 15px;
+}
+
+.leaderboard-box {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 15px;
+    background: #1e1e2f;
+    border-radius: 12px;
 }
 
 .leaderboard-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    margin-bottom: 12px; /* JARAK ANTAR BARIS */
-    background: rgba(255,255,255,0.08);
-    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #2a2a3f;
+    border-radius: 8px;
     font-size: 14px;
 }
 
-.leaderboard-row span {
-    flex: 1;
-    text-align: center;
+.reset-btn {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    background: crimson;
+    color: white;
+    cursor: pointer;
 }
 
-.rank {
-    font-weight: bold;
+.reset-btn:hover {
+    opacity: 0.8;
 }
-
-
