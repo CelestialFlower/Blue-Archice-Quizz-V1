@@ -57,12 +57,6 @@
         <div class="dev-card mika">
             <img src="img/Mika_Portrait.png" alt="Dev Mika">
             <div class="dev-name">Create By CelestiaXD</div>
-            <button onclick="adminLogin()">Admin Login</button>
-
-            <div id="adminPanel" class="hidden">
-                <button onclick="resetLeaderboard()">Reset Leaderboard</button>
-            </div>
-
         </div>
 
         <div class="dev-card kisaki">
@@ -80,16 +74,22 @@
 
         <h2 class="leaderboard-title">🏆 Leaderboard</h2>
 
-        <div id="leaderboard" class="leaderboard-box">
-            <!-- Data leaderboard muncul di sini -->
-        </div>
-
-        <div class="leaderboard-actions">
-            <button class="reset-btn" onclick="resetLeaderboard()">
-                🔥 Reset Leaderboard (Admin)
-            </button>
-        </div>
-
+        <h2>🔴 Compe Leaderboard</h2>
+        <div id="leaderboard-compe"></div>
+        <div id="leaderboard-compe"></div>
+        <button onclick="resetLeaderboard('compe')">
+            Reset Compe
+        </button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2>🟢 Casual Leaderboard</h2>
+        <div id="leaderboard-casual"></div>
+        <div id="leaderboard-casual"></div>
+        <button onclick="resetLeaderboard('casual')">
+            Reset Casual
+        </button>
     </div>
 
     <!-- firebase -->
