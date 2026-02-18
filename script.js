@@ -280,28 +280,51 @@ function endGame() {
 
 function submitScore() {
 
-    if (scoreSubmitted) return; // ⛔ tidak bisa 2x
+    if (scoreSubmitted) return;
     scoreSubmitted = true;
 
     const now = Date.now();
-    const lastSubmit = localStorage.getItem("lastSubmitTime");
 
-    // ⏳ Cooldown 15 detik
-    if (lastSubmit && now - lastSubmit < 15000) {
-        alert("Tunggu 15 detik sebelum submit lagi!");
-        scoreSubmitted = false; // supaya bisa coba lagi nanti
-        return;
-    }
+    const leaderboardRef = database.ref("leaderboard");
 
-    localStorage.setItem("lastSubmitTime", now);
+    leaderboardRef.orderByChild("name").equalTo(playerName).once("value", snapshot => {
 
-    database.ref("leaderboard").push({
-        name: playerName,
-        mode: mode.toUpperCase(),
-        score: correct,
-        timestamp: now
+        if (snapshot.exists()) {
+
+            snapshot.forEach(child => {
+
+                const oldData = child.val();
+                const oldScore = oldData.score;
+
+                // 🔥 Jika score baru lebih besar atau sama → update
+                if (correct >= oldScore) {
+
+                    database.ref("leaderboard/" + child.key).update({
+                        score: correct,
+                        mode: mode.toUpperCase(),
+                        timestamp: now
+                    });
+
+                } else {
+                    console.log("Score lebih kecil, tidak diupdate.");
+                }
+
+            });
+
+        } else {
+            // 🔥 Jika belum pernah submit → push baru
+            leaderboardRef.push({
+                name: playerName,
+                score: correct,
+                mode: mode.toUpperCase(),
+                timestamp: now
+            });
+        }
+
     });
+
 }
+
 
 // =======================
 // REALTIME LEADERBOARD
