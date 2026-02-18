@@ -284,46 +284,52 @@ function submitScore() {
     scoreSubmitted = true;
 
     const now = Date.now();
+    const nameKey = playerName.toLowerCase().trim();
 
     const leaderboardRef = database.ref("leaderboard");
 
-    leaderboardRef.orderByChild("name").equalTo(playerName).once("value", snapshot => {
+    leaderboardRef.child(nameKey).once("value", snapshot => {
 
         if (snapshot.exists()) {
 
-            snapshot.forEach(child => {
+            const oldData = snapshot.val();
+            const oldScore = oldData.score;
 
-                const oldData = child.val();
-                const oldScore = oldData.score;
+            // 🔥 Jika score baru lebih besar atau sama → update
+            if (correct >= oldScore) {
 
-                // 🔥 Jika score baru lebih besar atau sama → update
-                if (correct >= oldScore) {
+                leaderboardRef.child(nameKey).update({
+                    name: playerName,
+                    score: correct,
+                    mode: mode.toUpperCase(),
+                    timestamp: now
+                });
 
-                    database.ref("leaderboard/" + child.key).update({
-                        score: correct,
-                        mode: mode.toUpperCase(),
-                        timestamp: now
-                    });
+                console.log("Score diupdate!");
 
-                } else {
-                    console.log("Score lebih kecil, tidak diupdate.");
-                }
+            } else {
 
-            });
+                console.log("Score lebih kecil, tidak diupdate.");
+
+            }
 
         } else {
-            // 🔥 Jika belum pernah submit → push baru
-            leaderboardRef.push({
+
+            // 🔥 Jika belum ada → buat baru
+            leaderboardRef.child(nameKey).set({
                 name: playerName,
                 score: correct,
                 mode: mode.toUpperCase(),
                 timestamp: now
             });
+
+            console.log("Score baru ditambahkan!");
         }
 
     });
 
 }
+
 
 
 // =======================
