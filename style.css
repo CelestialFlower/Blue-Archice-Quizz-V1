@@ -249,7 +249,7 @@ input {
 }
 
 .leaderboard-box {
-    max-width: 500px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 15px;
     background: #1e1e2f;
@@ -282,3 +282,4 @@ input {
 .reset-btn:hover {
     opacity: 0.8;
 }
+
